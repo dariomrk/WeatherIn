@@ -1,4 +1,3 @@
-
 import { getCurrentWeatherData } from "./currentWeatherData";
 import env from "../env.json";
 

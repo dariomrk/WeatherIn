@@ -1,4 +1,3 @@
-
 export type currentWeatherDataDefinition = {
     coord: {lon: number, lat: number,},
     weather: Array<{id: number, main: string, description: string, icon: string,}>,

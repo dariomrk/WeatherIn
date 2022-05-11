@@ -16,7 +16,6 @@ const App: FunctionComponent<AppProps> = (props) => {
     const searchLimit = 5; // Maximum number of items getGeocoding is going to return.
     const [apiKey, setApiKey] = React.useState<string>(env.apiKey); // TODO: implement a way to input the API key from the UI.
     const [searchResult, setSearchResult] = React.useState<Array<geocodingDataDefinition> | null>(null);
-    const [selectedResult, setSelectedResult] = React.useState<geocodingDataDefinition | null>(null);
     const [weatherData, setWeatherData] = React.useState<currentWeatherDataDefinition | null>(null);
 
     // Handles city search
@@ -46,7 +45,6 @@ const App: FunctionComponent<AppProps> = (props) => {
         if (searchResult === null) {
             return;
         }
-        setSelectedResult(searchResult[index]); // Do I even need this?
 
         getCurrentWeatherData(env.apiKey, searchResult[index].lat, searchResult[index].lon)
             .then((result: currentWeatherDataDefinition) => {

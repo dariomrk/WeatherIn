@@ -1,4 +1,3 @@
-
 export type geocodingDataDefinition = {
     name: string,
     local_names: {},
