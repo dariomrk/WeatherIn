@@ -13,8 +13,8 @@ interface SelectCityProps {
  * selected item index passed as the argument.
  */
 const SelectCity: FunctionComponent<SelectCityProps> = (props) => {
-    
-    if(props.geocodingData === null) {
+
+    if (props.geocodingData === null) {
         return (
             <div id="select-city">
                 <ul id="select-city-list">
@@ -25,14 +25,14 @@ const SelectCity: FunctionComponent<SelectCityProps> = (props) => {
     }
 
     const listEntries = props.geocodingData.map((entry, i) => {
-        
-        return(
-            <CityListItem 
-            cityName={entry.name}
-            countryCode={entry.country}
-            index={i}
-            onSelectHandler={props.onSelectHandler}
-            key={i}
+
+        return (
+            <CityListItem
+                cityName={entry.name}
+                countryCode={entry.country}
+                index={i}
+                onSelectHandler={props.onSelectHandler}
+                key={i}
             />
         )
 
@@ -58,13 +58,13 @@ interface CityListItemProps {
 const CityListItem: FunctionComponent<CityListItemProps> = (props) => {
     return (
         <li className="select-city-item"
-        onClick={()=>{
-            props.onSelectHandler(props.index);
-        }}>
+            onClick={() => {
+                props.onSelectHandler(props.index);
+            }}>
             {`${props.cityName}, ${props.countryCode}`}
         </li>
     );
 
 }
- 
+
 export default SelectCity;

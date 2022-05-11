@@ -5,6 +5,7 @@ import SearchCity from "./searchCity";
 import SelectCity from "./selectCity";
 import WeatherInfo from "./weatherInfo";
 import env from "../env.json"
+import WeatherInfoItem from "./weatherInfoItem";
 
 interface AppProps {
 
@@ -47,27 +48,60 @@ const App: FunctionComponent<AppProps> = (props) => {
         }
         setSelectedResult(searchResult[index]); // Do I even need this?
 
-        getCurrentWeatherData(env.apiKey,searchResult[index].lat,searchResult[index].lon)
-        .then((result: currentWeatherDataDefinition) => {
-            setWeatherData(result);
-        })
-        .catch(() => {
-            console.error("ERROR: Cannot fetch data from an external API.");
-        })
+        getCurrentWeatherData(env.apiKey, searchResult[index].lat, searchResult[index].lon)
+            .then((result: currentWeatherDataDefinition) => {
+                setWeatherData(result);
+            })
+            .catch(() => {
+                console.error("ERROR: Cannot fetch data from an external API.");
+            })
+    }
+
+    // Handles the display of simple weather information
+    const displayWeatherInfo = () => {
+        if (weatherData === null) {
+            return (
+                <p id="weather-info-null">No information available.</p>
+            )
+        }
+
+        const main = weatherData.main;
+
+        return (
+            <React.Fragment>
+                <WeatherInfoItem
+                    info={`Feels like: ${main.feels_like}°C`}
+                />
+                <WeatherInfoItem
+                    info={`Actual temperature: ${main.temp}°C`}
+                />
+                <WeatherInfoItem
+                    info={`Wind speed: ${weatherData.wind.speed}m/s`}
+                />
+                <WeatherInfoItem
+                    info={`Wind speed: ${weatherData.wind.speed}m/s`}
+                />
+                <WeatherInfoItem
+                    info={`Wind direction: ${weatherData.wind.deg}°`}
+                />
+            </React.Fragment>
+        )
     }
 
     return (
         <React.Fragment>
-            <SearchCity
-                onSearchHandler={searchHandler}
-            />
-            <SelectCity
-                geocodingData={searchResult}
-                onSelectHandler={selectHandler}
-            />
-            <WeatherInfo
-                data={weatherData}
-            />
+            <div id="input">
+                <SearchCity
+                    onSearchHandler={searchHandler}
+                />
+                <SelectCity
+                    geocodingData={searchResult}
+                    onSelectHandler={selectHandler}
+                />
+            </div>
+            <WeatherInfo>
+                {displayWeatherInfo()}
+            </WeatherInfo>
         </React.Fragment>
     );
 }
