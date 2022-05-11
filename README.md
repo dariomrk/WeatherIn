@@ -10,4 +10,5 @@ This is personal project, made mainly to learn concepts such as unit testing, as
 - Clone the repo.
 - Go to [OpenWeatherMap](https://home.openweathermap.org/api_keys) and grab an API key.
 - Rename the `./src/env.example.json` to `./src/env.json` and fill out the necessary information, namely the *`apiKey`* field.
+- Run `npm i` to install dependencies.
 - Run `npm start` or `npm build`.
