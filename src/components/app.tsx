@@ -24,8 +24,8 @@ const App: FunctionComponent<AppProps> = (props) => {
      * @returns Cardinal or intercardinal direction
      */
     const bearingToCardinal = (bearing: number) => {
-        const directions = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
-        return directions[Math.round((bearing % 360)/22.5)];
+        const directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"];
+        return directions[Math.round((bearing % 360) / 22.5)];
     }
 
     /**
@@ -99,7 +99,7 @@ const App: FunctionComponent<AppProps> = (props) => {
                     info={`Wind speed: ${weatherData.wind.speed}m/s`}
                 />
                 <WeatherInfoItem
-                    info={`Wind direction: ${weatherData.wind.deg}°`}
+                    info={`Wind direction: ${bearingToCardinal(weatherData.wind.deg)}`}
                 />
             </React.Fragment>
         )
