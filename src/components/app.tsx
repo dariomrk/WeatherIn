@@ -18,8 +18,21 @@ const App: FunctionComponent<AppProps> = (props) => {
     const [searchResult, setSearchResult] = React.useState<Array<geocodingDataDefinition> | null>(null);
     const [weatherData, setWeatherData] = React.useState<currentWeatherDataDefinition | null>(null);
 
-    // Handles city search
-    const searchHandler = (userInput: string) => {
+    /**
+     * Returns cardinal or intercardinal direction depending on the bearing argument.
+     * @param bearing Bearing
+     * @returns Cardinal or intercardinal direction
+     */
+    const bearingToCardinal = (bearing: number) => {
+        const directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"];
+        return directions[Math.round((bearing % 360) / 22.5)];
+    }
+
+    /**
+     * Handles city search.
+     * @param userInput City of interest
+     */
+    const searchHandler = (userInput: string): void => {
 
         try {
             // Block empty search
@@ -40,8 +53,11 @@ const App: FunctionComponent<AppProps> = (props) => {
 
     }
 
-    // Handles the selection of an city
-    const selectHandler = (index: number) => {
+    /**
+     * Handles the selection of an city.
+     * @param index Number cooresponding to the index of the selected city
+     */
+    const selectHandler = (index: number): void => {
         if (searchResult === null) {
             return;
         }
@@ -55,7 +71,10 @@ const App: FunctionComponent<AppProps> = (props) => {
             })
     }
 
-    // Handles the display of simple weather information
+    /**
+     * Handles the display of simple weather information.
+     * @returns WeatherInfoItem array if weather info is available
+     */
     const displayWeatherInfo = () => {
         if (weatherData === null) {
             return (
@@ -80,7 +99,7 @@ const App: FunctionComponent<AppProps> = (props) => {
                     info={`Wind speed: ${weatherData.wind.speed}m/s`}
                 />
                 <WeatherInfoItem
-                    info={`Wind direction: ${weatherData.wind.deg}°`}
+                    info={`Wind direction: ${bearingToCardinal(weatherData.wind.deg)}`}
                 />
             </React.Fragment>
         )
