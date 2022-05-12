@@ -1,4 +1,4 @@
-import { getGeocoding } from "./geocoding";
+import { getGeocoding } from "./getGeocoding";
 import env from "../env.json";
 
 test("getGeocoding: response status 200", done => {

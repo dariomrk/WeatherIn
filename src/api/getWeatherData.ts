@@ -1,4 +1,4 @@
-export type currentWeatherDataDefinition = {
+export type weatherDataT = {
     coord: {lon: number, lat: number,},
     weather: Array<{id: number, main: string, description: string, icon: string,}>,
     base: string,
@@ -36,7 +36,7 @@ export type currentWeatherDataDefinition = {
  * @param lon Longitude
  * @returns Promise with weather data
  */
-export const getCurrentWeatherData = async (apiKey: string, lat: number, lon: number): Promise<currentWeatherDataDefinition> => {
+export const getWeatherData = async (apiKey: string, lat: number, lon: number): Promise<weatherDataT> => {
 
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
@@ -45,7 +45,7 @@ export const getCurrentWeatherData = async (apiKey: string, lat: number, lon: nu
         if (httpResponse.status !== 200) {
             return Promise.reject(new Error(`Cannot fetch from http://api.openweathermap.org/. HTTP status: ${httpResponse.status}`));
         }
-        return httpResponse.json() as Promise<currentWeatherDataDefinition>;
+        return httpResponse.json() as Promise<weatherDataT>;
     })
 
     return Promise.resolve(data);
