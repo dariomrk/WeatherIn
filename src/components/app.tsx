@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import { geocodingDataDefinition, getGeocoding } from "../api/geocoding";
 import { currentWeatherDataDefinition, getCurrentWeatherData } from "../api/currentWeatherData";
 import SearchCity from "./searchCity";
-import SelectCity from "./selectCity";
 import WeatherInfo from "./weatherInfo";
 import env from "../env.json"
 import WeatherInfoItem from "./weatherInfoItem";
@@ -13,9 +12,7 @@ interface AppProps {
 
 const App: FunctionComponent<AppProps> = (props) => {
 
-    const searchLimit = 5; // Maximum number of items getGeocoding is going to return.
     const [apiKey, setApiKey] = React.useState<string>(env.apiKey); // TODO: implement a way to input the API key from the UI.
-    const [searchResult, setSearchResult] = React.useState<Array<geocodingDataDefinition> | null>(null);
     const [weatherData, setWeatherData] = React.useState<currentWeatherDataDefinition | null>(null);
 
     /**
@@ -29,7 +26,7 @@ const App: FunctionComponent<AppProps> = (props) => {
     }
 
     /**
-     * Handles city search.
+     * Handles city search and sets the current weather data.
      * @param userInput City of interest
      */
     const searchHandler = (userInput: string): void => {
@@ -40,35 +37,24 @@ const App: FunctionComponent<AppProps> = (props) => {
                 return;
             }
 
-            getGeocoding(apiKey, userInput, searchLimit)
-                .then((r: Array<geocodingDataDefinition>) => {
-                    setSearchResult(r);
+            getGeocoding(apiKey, userInput, 1)
+                .then((geocodes: Array<geocodingDataDefinition>) => {
+                    const r = geocodes[0];
+                    getCurrentWeatherData(env.apiKey,r.lat,r.lon)
+                    .then((w: currentWeatherDataDefinition)=>{
+                        setWeatherData(w);
+                    })
+                    .catch(()=>{
+                        console.error("ERROR: Cannot fetch weather data.")
+                    })
                 })
                 .catch(() => {
-                    console.error("ERROR: Cannot fetch data from an external API.");
+                    console.error("ERROR: Cannot perform geocoding.");
                 })
         } catch (e) {
             console.warn("WARN: Cannot parse user input.");
         }
 
-    }
-
-    /**
-     * Handles the selection of an city.
-     * @param index Number cooresponding to the index of the selected city
-     */
-    const selectHandler = (index: number): void => {
-        if (searchResult === null) {
-            return;
-        }
-
-        getCurrentWeatherData(env.apiKey, searchResult[index].lat, searchResult[index].lon)
-            .then((result: currentWeatherDataDefinition) => {
-                setWeatherData(result);
-            })
-            .catch(() => {
-                console.error("ERROR: Cannot fetch data from an external API.");
-            })
     }
 
     /**
@@ -110,10 +96,6 @@ const App: FunctionComponent<AppProps> = (props) => {
             <div id="input">
                 <SearchCity
                     onSearchHandler={searchHandler}
-                />
-                <SelectCity
-                    geocodingData={searchResult}
-                    onSelectHandler={selectHandler}
                 />
             </div>
             <WeatherInfo>
