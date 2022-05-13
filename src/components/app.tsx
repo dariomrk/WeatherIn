@@ -6,9 +6,6 @@ const App: FunctionComponent = () => {
 
     return (
         <React.Fragment>
-            <Search callback={(userInput: string)=>{
-                // TODO: Handle user input
-            }}/>
         </React.Fragment>
     );
 }
