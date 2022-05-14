@@ -18,6 +18,9 @@
     justify-content: center;
     overflow: show;
     border: 0.1vh solid black;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
     /* border: 0.3vh solid red; */ 
 }
 
@@ -28,11 +31,12 @@
     font-size: xx-large;
     padding: 2%;
     border: 0;
+    outline: none;
 }
 
 .search-submit {
     width: 20%;
-    height: 8vh;
+    height: 100%;
     margin: 0;
     padding: 0;
     border: 0;
@@ -42,6 +46,7 @@
 .search-submit:hover {
     background-color: aliceblue;
     border-radius: 0;
+    cursor:pointer;
 }
 
 .search-icon {
