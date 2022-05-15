@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { geocodingDataT } from "../../api/getGeocoding";
-import { weatherDataT } from "../../api/getWeatherData";
-import { geocodingAdapter } from "../../api/adapter/geocodingAdapter";
 import env from "../../env.json"
-import Search from "../search/search";
+import { geocodingDataT } from "../../api/getGeocoding";
+import { getWeatherData, weatherDataT } from "../../api/getWeatherData";
+import { geocodingAdapter } from "../../api/adapter/geocodingAdapter";
+import Search from "../input/search";
+import WeatherIcon from "../output/weathericon";
+import Output from "../output/output";
 
 const App: FunctionComponent = () => {
 
@@ -33,7 +35,14 @@ const App: FunctionComponent = () => {
         }
         // if geocodingAdapter returned data
         setShowingError(false);
-        // TODO: get weather data and display it
+
+        getWeatherData(env.apiKey, geocode.lat, geocode.lon)
+        .then((result) => {
+            setWeatherData(result);
+        })
+        .catch((e: Error)=>{
+            console.warn(e.message);
+        })
     }, [geocode])
 
     return (
@@ -42,6 +51,7 @@ const App: FunctionComponent = () => {
                 callback={searchHandler}
                 showingError={showingError}
             />
+            <Output data={weather} />
         </React.Fragment>
     );
 }

@@ -12,7 +12,7 @@ const Search: FunctionComponent<SearchProps> = (props) => {
     const [userInput, setUserInput] = useState<string>("");
 
     return (
-        <div role={"form"} className="search-box">
+        <div role={"form"} className="search-container">
             <div className="search-border" style={props.showingError ? { border: errorStyle } : undefined}>
                 <input
                     placeholder="Search for a location..."
