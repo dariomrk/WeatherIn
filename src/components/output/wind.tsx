@@ -19,20 +19,19 @@ const bearingConvert = (bearing: number) => {
 const Wind: FunctionComponent<WindProps> = (props) => {
 
     return (
-        <div className="wind-container">
-            <div className="wind-container-intensity">
-                <p className="wind-intensity">
-                    Wind speed: {props.data.wind.speed}m/s
-                </p>
-            </div>
-            <div className="spacer" />
-            <div className="wind-container-direction">
-                <p className="wind-direction">
-                    Wind coming from: {bearingConvert(props.data.wind.deg)}
-                </p>
-            </div>
+        <div className="wind">
+            <p>Wind speed: {props.data.wind.speed}m/s</p>
         </div>
     );
 }
 
-export default Wind;
+const Direction: FunctionComponent<WindProps> = (props) => {
+
+    return (
+        <div className="wind-direction">
+            <p>Wind direction: {bearingConvert(props.data.wind.deg)}</p>
+        </div>
+    )
+}
+
+export { Wind, Direction };

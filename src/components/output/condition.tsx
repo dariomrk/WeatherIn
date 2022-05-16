@@ -7,11 +7,9 @@ interface ConditionProps {
 
 const Condition: FunctionComponent<ConditionProps> = (props) => {
     return (
-        <div className="condition-container">
             <p className="condition">
                 {props.data.weather[0].description.toUpperCase()}
             </p>
-        </div>
     );
 }
 

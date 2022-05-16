@@ -7,16 +7,18 @@ interface TemperatureProps {
 
 const Temperature: FunctionComponent<TemperatureProps> = (props) => {
     return (
-        <div className="temperature-container">
-            <p className="actual-temperature">
-                Actual temperature: {props.data.main.temp} °C
-            </p>
-            <div className="spacer" />
-            <p className="feels-like">
-                Feels like: {props.data.main.feels_like} °C
-            </p>
-        </div>
+        <h2 className="temperature">
+            {props.data.main.temp} °C
+        </h2>
     );
 }
 
-export default Temperature;
+const FeelsLike: FunctionComponent<TemperatureProps> = (props) => {
+    return (
+        <p className="feels-like">
+            Feels like: {props.data.main.feels_like} °C
+        </p>
+    )
+}
+
+export { Temperature, FeelsLike };

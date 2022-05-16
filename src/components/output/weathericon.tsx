@@ -8,9 +8,9 @@ interface WeatherIconProps {
 const WeatherIcon: FunctionComponent<WeatherIconProps> = (props) => {
 
     return (
-        <div className="weather-icon-container">
-            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`} />
-        </div>
+            <img className="weather-icon"
+            src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`}
+            alt="Weather icon" />
     );
 }
 

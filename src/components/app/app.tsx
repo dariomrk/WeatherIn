@@ -51,7 +51,9 @@ const App: FunctionComponent = () => {
                 callback={searchHandler}
                 showingError={showingError}
             />
-            <Output data={weather} />
+            <Output
+                data={weather}
+             />
         </React.Fragment>
     );
 }
