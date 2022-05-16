@@ -5,6 +5,11 @@ Tests made using `Jest`.
 
 This is personal project, made mainly to learn concepts such as unit testing, async programming and API handling.
 
+# Screenshots
+
+![WeatherIn](https://imgur.com/DyLS2Ut.png)
+*WeatherIn after searching for Split, HR*
+
 # Getting started
 
 - Clone the repo.

@@ -1,0 +1,116 @@
+body {
+    font-family: sans-serif;
+    background-color: whitesmoke;
+}
+
+/* Input */
+.search-container {
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: show;
+}
+
+.search-border {
+    width: 30%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: show;
+    border: 0.1vh solid black;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    /* border: 0.3vh solid red; */
+}
+
+.search-input {
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    font-size: xx-large;
+    padding: 2%;
+    border: 0;
+    outline: none;
+}
+
+.search-submit {
+    width: 20%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-left: 0.1vh solid black;
+    background-color: white;
+}
+
+.search-submit:hover {
+    background-color: aliceblue;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.search-icon {
+    height: 100%;
+    height: 100%;
+}
+
+/* Output */
+.output-container {
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.weather-card {
+    width: 40vw;
+    border: 1px solid black;
+    padding: 0;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.weather-card-header {
+    margin: 0;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+#root>div.output-container>div>div.content>div.row>div:nth-child(1)>p {
+    padding-left: 2%;
+    margin-left: 2vw;
+}
+
+#root>div.output-container>div.weather-card>div.weather-card-header>p {
+    font-size: x-large;
+}
+
+.content {
+    margin: 0;
+    padding: 0;
+}
+
+.icon-and-temperature {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 2vw;
+}
